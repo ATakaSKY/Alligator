@@ -1,0 +1,5 @@
+Ususally with an observable when we subscribe to it there must be a moment when we should unsubscribe
+from it as well in order to prevent any memory leaks. This place is generally ngOnDestroy().
+
+But with async we don't have to worry about subscribing as well as unsubscribing as async pipe takes
+care of both the things for us.
