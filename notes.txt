@@ -1,0 +1,33 @@
+Suppose there are two components A and B. A passes data to B through input property binding and lets say
+it passed an array like:
+
+<B [data]="datasArray"></B>
+
+Now when we have ChangeDetectionStrategy mentioned as onPush in B, Angular will avoid detecting any changes
+in component B unless an input property reference changes like:
+
+1. In A.ts:
+
+addFood(food) {
+    this.foods.push(food);
+}
+
+Here B won't notice the change.
+
+2. In A.ts:
+
+addFood(food) {
+  this.foods = [...this.foods, food];
+}
+
+Here B will notice the change as there is a change in reference in input property.
+
+
+
+ChangeDetectorRef:
+Can still use method (1) shown above and get data reflected in B with ChangeDetectorRef. Just put a button
+in B and execute a click event like:
+
+refresh() {
+    this.cd.detectChanges();
+}
