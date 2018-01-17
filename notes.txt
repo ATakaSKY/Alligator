@@ -1,0 +1,22 @@
+CanLoad :
+Controls if a route can even be loaded. This becomes useful for feature modules that are lazy loaded.
+They won’t even load if the guard returns false.
+
+CanDeactivate :
+Controls if the user can leave a route. Note that this guard doesn’t prevent the user from closing the
+browser tab or navigating to a different address. It only prevents actions from within the application itself.
+
+Can we specify multiple guards for a single route?
+We could specify multiple guards for a single route,
+and they’ll be evaluated in the order in which they are specified.
+
+The CanDeactivate guard has a slight difference in its implementation
+in that we need to provide the component to be deactivated.
+export class CanActivateRouteGuard implements CanDeactivate<DashboardComponent> {
+  canDeactivate(component: DashboardComponent): boolean {
+    if (component.unsavedChanges) {
+      return confirm('Are you sure?');
+    }
+    return true;
+  }
+}
